@@ -23,7 +23,7 @@ class MemUnit(implicit val conf:CAHPConfig) extends Module {
   val io = IO(new MemUnitPort())
 
   io.out := io.wbIn
-  io.ramPort.addr := io.addr.res(8,1)
+  io.ramPort.addr := io.addr.res(conf.dataAddrWidth-1,1)
   io.ramPort.writeData := DontCare
   io.ramPort.writeEnable := false.B
 

@@ -113,7 +113,7 @@ class IfUnit(implicit val conf: CAHPConfig) extends Module {
   }
 
     stole := false.B
-    io.out.romAddr := pc(8, 2)
+    io.out.romAddr := pc(conf.instAddrWidth-1, 2)
     when(romCacheState === romCacheStateType.NotLoaded){
       inst := getInst(pc, io.in.romData, io.in.romData)
       when(isLong){
@@ -134,7 +134,7 @@ class IfUnit(implicit val conf: CAHPConfig) extends Module {
         }
       }
     }.otherwise{
-      io.out.romAddr := pc(8, 2) + 1.U
+      io.out.romAddr := pc(conf.instAddrWidth-1, 2) + 1.U
       inst := getInst(pc, io.in.romData, romCache)
       stole := false.B
     }
