@@ -54,7 +54,7 @@ class ALU(implicit val conf:CAHPConfig) extends Module {
   val resCarry = Wire(UInt(17.W))
   val inB_sub = Wire(UInt(16.W))
   resCarry := DontCare
-  inB_sub := (~io.in.inB).asUInt()+1.U
+  inB_sub := (~io.in.inB).asUInt + 1.U
 
   when(io.in.opcode === ALUOpcode.ADD) {
     io.out.out := io.in.inA + io.in.inB
@@ -68,11 +68,11 @@ class ALU(implicit val conf:CAHPConfig) extends Module {
   }.elsewhen(io.in.opcode === ALUOpcode.XOR) {
     io.out.out := io.in.inA ^ io.in.inB
   }.elsewhen(io.in.opcode === ALUOpcode.LSL) {
-    io.out.out := (io.in.inA << io.in.inB).asUInt()
+    io.out.out := (io.in.inA << io.in.inB).asUInt
   }.elsewhen(io.in.opcode === ALUOpcode.LSR) {
-    io.out.out := (io.in.inA >> io.in.inB).asUInt()
+    io.out.out := (io.in.inA >> io.in.inB).asUInt
   }.elsewhen(io.in.opcode === ALUOpcode.ASR) {
-    io.out.out := (io.in.inA.asSInt() >> io.in.inB).asUInt()
+    io.out.out := (io.in.inA.asSInt >> io.in.inB).asUInt
   }.elsewhen(io.in.opcode === ALUOpcode.MOV) {
     io.out.out := io.in.inB
   }.otherwise {

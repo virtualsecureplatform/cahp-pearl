@@ -5,16 +5,12 @@ class IfUnitIn(implicit val conf:CAHPConfig) extends Bundle {
   val romData = UInt(conf.romDataWidth.W)
   val jumpAddress = UInt(conf.instAddrWidth.W)
   val jump = Bool()
-
-  override def cloneType: this.type = new IfUnitIn()(conf).asInstanceOf[this.type]
 }
 
 class IfUnitOut(implicit val conf:CAHPConfig) extends Bundle {
   val romAddr = UInt(conf.romAddrWidth.W)
   val inst = UInt(conf.instDataWidth.W)
   val instAddr = UInt(conf.instAddrWidth.W)
-
-  override def cloneType: this.type = new IfUnitOut()(conf).asInstanceOf[this.type]
 }
 
 class IfUnitPort(implicit val conf:CAHPConfig) extends Bundle {

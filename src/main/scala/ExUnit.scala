@@ -43,8 +43,6 @@ class ExUnitOut(implicit val conf:CAHPConfig) extends Bundle {
   val res = Output(UInt(16.W))
   val jumpAddress = Output(UInt(conf.instAddrWidth.W))
   val jump = Output(Bool())
-
-  override def cloneType: this.type = new ExUnitOut()(conf).asInstanceOf[this.type]
 }
 
 class ExUnit(implicit val conf:CAHPConfig) extends Module {
@@ -81,9 +79,9 @@ class ExUnit(implicit val conf:CAHPConfig) extends Module {
   }.elsewhen(io.in.bcIn.pcOpcode === 5.U){
     io.out.jump := !flagZero
   }.elsewhen(io.in.bcIn.pcOpcode === 6.U){
-    io.out.jump := flagSign != flagOverflow
+    io.out.jump := flagSign =/= flagOverflow
   }.elsewhen(io.in.bcIn.pcOpcode === 7.U){
-    io.out.jump := (flagSign != flagOverflow)||flagZero
+    io.out.jump := (flagSign =/= flagOverflow) || flagZero
   }
 
   when(conf.debugEx.B) {

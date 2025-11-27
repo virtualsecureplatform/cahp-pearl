@@ -2,16 +2,19 @@ name := "cahp-pearl"
 
 version := "0.1"
 
-scalaVersion := "2.12.8"
+scalaVersion := "2.13.12"
+addCompilerPlugin("edu.berkeley.cs" % "chisel3-plugin" % "3.6.1" cross CrossVersion.full)
 
-scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-language:reflectiveCalls")
-val chiselGroupId = "edu.berkeley.cs"
+resolvers ++= Resolver.sonatypeOssRepos("releases")
+
 libraryDependencies ++= Seq(
-  chiselGroupId %% "chisel3" % "3.0.+",
-  chiselGroupId %% "chisel-iotesters" % "1.1.+"
-)
-resolvers ++= Seq(
-  Resolver.sonatypeRepo("snapshots"),
-  Resolver.sonatypeRepo("releases")
+    "edu.berkeley.cs" %% "chisel3" % "3.6.1",
 )
 
+scalacOptions ++= Seq(
+      "-Xsource:2.13",
+      "-language:reflectiveCalls",
+      "-deprecation",
+      "-feature",
+      "-Xcheckinit"
+    )

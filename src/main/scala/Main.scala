@@ -1,6 +1,6 @@
 object Main extends App{
   implicit val conf = CAHPConfig()
   conf.test = false
-  chisel3.Driver.execute(args, () => new VSPCore())
-  chisel3.Driver.execute(args, () => new ExternalRam())
+  (new chisel3.stage.ChiselStage).emitVerilog(new VSPCore(), args)
+  (new chisel3.stage.ChiselStage).emitVerilog(new ExternalRam(), args)
 }
