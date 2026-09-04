@@ -1,4 +1,10 @@
-case class CAHPConfig() {
+case class CAHPConfig(
+  romAddrWidth: Int = 7,
+  ramAddrWidth: Int = 8,
+) {
+  require(romAddrWidth > 0, "ROM address width must be positive")
+  require(ramAddrWidth > 0, "RAM address width must be positive")
+
   var debugIf = true
   var debugId = true
   var debugEx = true
@@ -10,13 +16,11 @@ case class CAHPConfig() {
   var testRam:Seq[BigInt] = Seq(BigInt(0))
 
   //IF Unit
-  val romAddrWidth = 7
   val romDataWidth = 32
 
   val instAddrWidth = romAddrWidth+2
   val instDataWidth = 24
 
-  val ramAddrWidth = 8
   val ramDataWidth = 16
 
   val dataAddrWidth = ramAddrWidth+1
